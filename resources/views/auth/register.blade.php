@@ -1,52 +1,23 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" class="flex flex-col justify-evenly h-screen">
         @csrf
+        <section>
+            <h1 class="text-3xl text-center font-extrabold">Daftar DESA</h1>
+        </section>
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+        <section class="mt-5 flex flex-col gap-4">
+            <input type="text" required name="nama" placeholder="Nama Desa" class="input bg-[#7f9ab6] placeholder:text-black input-bordered w-full max-w-xs mx-auto" />
+            <input type="text" required name="kode_pos" placeholder="Kode Pos" class="input bg-[#7f9ab6] placeholder:text-black input-bordered w-full max-w-xs mx-auto" />
+            <input type="text" required name="alamat" placeholder="Alamat Desa" class="input bg-[#7f9ab6] placeholder:text-black input-bordered w-full max-w-xs mx-auto" />
+            <input type="text" required name="name" placeholder="Nama Pengguna" class="input bg-[#7f9ab6] placeholder:text-black input-bordered w-full max-w-xs mx-auto" />
+            <input type="text" required name="no_hp" placeholder="No Handphone" class="input bg-[#7f9ab6] placeholder:text-black input-bordered w-full max-w-xs mx-auto" />
+            <input type="password" required name="password" placeholder="Kata Sandi" class="input bg-[#7f9ab6] placeholder:text-black input-bordered w-full max-w-xs mx-auto" />
+            <input type="password" required name="password_confirmation" placeholder="Konfirmasi Kata Sandi" class="input bg-[#7f9ab6] placeholder:text-black input-bordered w-full max-w-xs mx-auto" />
+        </section>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        <section class="mt-5 flex justify-center">
+            <button type="submit" class="px-3 py-2 btn border-none bg-[#81c7d8] w-full max-w-xs mx-auto">DAFTAR</button>
+        </section>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
     </form>
 </x-guest-layout>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class RegisteredUserController extends Controller
 {
@@ -26,25 +27,36 @@ class RegisteredUserController extends Controller
      * Handle an incoming registration request.
      *
      * @throws \Illuminate\Validation\ValidationException
+     *
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        // Insert data into 'desa' table
+        $desa = DB::table('desa')->insertGetId([
+            'nama' => $request->nama,
+            'kode_pos' => $request->kode_pos,
+            'alamat' => $request->alamat,
         ]);
 
-        $user = User::create([
+        // Insert data into 'users' table
+        $user = DB::table('users')->insertGetId([
             'name' => $request->name,
-            'email' => $request->email,
+            'role' => 'Admin',
+            'no_hp' => $request->no_hp,
             'password' => Hash::make($request->password),
+            'is_confirmed' => true,
+            'id_desa' => $desa,
         ]);
 
+        $user = User::find($user);
+
+        // Trigger the Registered event
         event(new Registered($user));
 
-        Auth::login($user);
+        // Log in the user
+        Auth::loginUsingId($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Redirect to the dashboard
+        return redirect()->route('dashboard');
     }
 }
