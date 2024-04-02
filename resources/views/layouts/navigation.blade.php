@@ -5,13 +5,19 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 font-extrabold text-2xl text-[#365586] flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        @php
-                            $firstName = explode(' ', Auth::user()->name)[0];
-                            $firstName = ucfirst($firstName);
-                        @endphp
-                        Hello, {{ $firstName }}
-                    </a>
+                    @if (request()->routeIs('posts.*'))
+                        <a href="{{ route('dashboard') }}">
+                            Kabar Hari Ini
+                        </a>
+                    @else
+                        <a href="{{ route('dashboard') }}">
+                            @php
+                                $firstName = explode(' ', Auth::user()->name)[0];
+                                $firstName = ucfirst($firstName);
+                            @endphp
+                            Hello, {{ $firstName }}
+                        </a>
+                    @endif
                 </div>
 
                 <!-- Navigation Links -->
@@ -62,7 +68,7 @@
                     @else
                         <div class="w-12 rounded-full">
                             <img class="rounded-full"
-                            src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF"/>
+                                src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&color=7F9CF5&background=EBF4FF" />
                         </div>
                     @endif
                 </button>

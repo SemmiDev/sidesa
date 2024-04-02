@@ -7,7 +7,7 @@
         </section>
 
         <section>
-            <div class="bg-[#23335f] w-full max-w-xs mx-auto rounded-md px-7 py-5">
+            <div class="bg-[#23335f] text-black w-full max-w-xs mx-auto rounded-md px-7 py-5">
                 <h2 class="text-white text-center font-semibold text-2xl">Log in</h2>
                 <div class="space-y-3 mt-7">
                     <input type="text" required name="no_hp" placeholder="No Handphone" class="input bg-[#a6b8c5] placeholder:text-black input-bordered w-full max-w-xs mx-auto" />

@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\AnggotaGrupController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\GrupController;
+use App\Http\Controllers\KomentarController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterWargaController;
 use App\Http\Controllers\UserController;
@@ -47,6 +52,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/groups/{id}', [GroupController::class, 'destroy'])->name('groups.destroy');
 
     Route::get('/groups/{id}/chats', [GroupController::class, 'chat'])->name('chats.index');
+    Route::post('/groups/{id}/chats', [GroupController::class, 'postChat'])->name('chats.post');
+    Route::get('/groups/{id}/chats/load', [GroupController::class, 'load'])->name('chats.load');
+    Route::get('/groups/{id}/chats/download', [GroupController::class, 'download'])->name('chats.download');
+    Route::get('/api/groups/{id}/chats', [GroupController::class, 'chatApi'])->name('chats.api');
     Route::get('/groups/{id}/members', [GroupController::class, 'members'])->name('groups.members');
 
     // join
@@ -67,6 +76,47 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::post('/users/{id}/confirm', [UserController::class, 'confirm'])->name('users.confirm');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
+    Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/grups', [GrupController::class, 'index'])->name('grups.index');
+    Route::get('/grups/create', [GrupController::class, 'create'])->name('grups.create');
+    Route::get('/grups/{id}/anggota', [GrupController::class, 'anggotaindex'])->name('grups.anggota.index');
+    Route::delete('/grups/{id}/anggota/{id_anggota}', [GrupController::class, 'anggotadestroy'])->name('grups.anggota.destroy');
+    Route::post('/grups/{id}/anggota/{id_anggota}/accept', [GrupController::class, 'anggotaaccept'])->name('grups.anggota.accept');
+    Route::post('/grups', [GrupController::class, 'store'])->name('grups.store');
+    Route::get('/grups/{id}/edit', [GrupController::class, 'edit'])->name('grups.edit');
+    Route::put('/grups/{id}', [GrupController::class, 'update'])->name('grups.update');
+    Route::delete('/grups/{id}', [GrupController::class, 'destroy'])->name('grups.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/anggota_grups', [AnggotaGrupController::class, 'index'])->name('anggota_grups.index');
+    Route::get('/anggota_grups/create', [AnggotaGrupController::class, 'create'])->name('anggota_grups.create');
+    Route::post('/anggota_grups', [AnggotaGrupController::class, 'store'])->name('anggota_grups.store');
+    Route::get('/anggota_grups/{id}/edit', [AnggotaGrupController::class, 'edit'])->name('anggota_grups.edit');
+    Route::put('/anggota_grups/{id}', [AnggotaGrupController::class, 'update'])->name('anggota_grups.update');
+    Route::delete('/anggota_grups/{id}', [AnggotaGrupController::class, 'destroy'])->name('anggota_grups.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/like/{postId}', [PostLikeController::class, 'like'])->name('post.like');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/komentar', [KomentarController::class, 'store'])->name('komentar.store');
+    Route::get('/komentar/{id}/edit', [KomentarController::class, 'edit'])->name('komentar.edit');
+    Route::put('/komentar/{id}', [KomentarController::class, 'update'])->name('komentar.update');
+    Route::delete('/komentar/{id}', [KomentarController::class, 'destroy'])->name('komentar.destroy');
 });
 
 require __DIR__ . '/auth.php';
