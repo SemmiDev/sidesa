@@ -10,16 +10,10 @@ class KomentarController extends Controller
 {
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'id_post' => 'required|exists:posts,id',
-            'id_creator' => 'required|exists:users,id',
-            'content' => 'required',
-        ]);
-
         DB::table('komentar')->insert([
-            'id_post' => $validatedData['id_post'],
-            'id_creator' => $validatedData['id_creator'],
-            'content' => $validatedData['content'],
+            'id_post' => $request->get('post_id'),
+            'id_creator' => auth()->user()->id,
+            'content' => $request->get('content'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);

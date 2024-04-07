@@ -26,6 +26,11 @@ return new class extends Migration
 
             $table->string('password');
             $table->boolean('is_confirmed')->default(false);
+
+
+            $table->double('lat')->nullable();
+            $table->double('long')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

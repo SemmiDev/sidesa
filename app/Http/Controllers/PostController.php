@@ -153,4 +153,45 @@ class PostController extends Controller
         DB::table('posts')->where('id', $id)->delete();
         return redirect()->route('posts.index')->with('success', 'Post berhasil dihapus');
     }
+
+    public function show($id) {
+        $post = DB::table('posts')
+            ->join('users', 'posts.id_creator', '=', 'users.id')
+            ->leftJoin('post_like', 'posts.id', '=', 'post_like.id_post')
+            ->leftJoin('komentar', 'posts.id', '=', 'komentar.id_post')
+            ->select(
+                'posts.id',
+                'posts.content',
+                'posts.photo',
+                'posts.kategori',
+                'posts.updated_at',
+                'users.id as creator_id',
+                'users.name as creator_name',
+                'users.image as creator_image',
+                DB::raw('COUNT(DISTINCT post_like.id) as like_count'),
+                DB::raw('COUNT(DISTINCT komentar.id) as comment_count')
+            )
+            ->where('posts.id', $id)
+            ->groupBy('posts.id', 'posts.content', 'posts.updated_at', 'users.image', 'posts.photo', 'posts.kategori', 'users.name', 'users.id')
+            ->first();
+
+        $post->is_liked = DB::table('post_like')
+            ->where('id_post', $post->id)
+            ->where('id_user', auth()->user()->id)
+            ->exists();
+
+
+            $comments = DB::table('komentar')
+            ->join('users', 'komentar.id_creator', '=', 'users.id')
+            ->select('komentar.id', 'komentar.content', 'komentar.created_at', 'users.name as creator_name', 'users.image as creator_image')
+            ->where('komentar.id_post', $id)
+            ->orderBy('komentar.created_at', 'asc')
+            ->get();
+
+
+        return view('posts.show', [
+            'post' => $post,
+            'comments' => $comments
+        ]);
+    }
 }

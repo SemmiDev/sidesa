@@ -26,4 +26,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const latitude = document.getElementById('latitude');
+            const longitude = document.getElementById('longitude');
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+                latitude.value = position.coords.latitude;
+                longitude.value = position.coords.longitude;
+            });
+
+        });
+    </script>
+
 </x-app-layout>

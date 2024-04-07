@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <div class="max-w-md mx-auto mt-5 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+        <div class="h-fit max-w-md mx-auto mt-5 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
             <div role="tablist" class="tabs bg-[#375486] font-semibold p-2 gap-5 tabs-boxed">
                 <a href="{{ route('posts.index') }}" role="tab"
                     class="tab {{ $tab == 'Umum' ? 'tab-active' : '' }} gap-1">
@@ -78,7 +78,8 @@
         <div class="max-w-md flex flex-col gap-3 w-full text-gray-800 mx-auto mt-5 overflow-hidden md:max-w-2xl">
             @if ($tab == 'Umum')
                 @forelse ($posts as $post)
-                    <div class="p-4 bg-white md:p-6 rounded-xl shadow-md">
+                    <div
+                    class="p-4 bg-white md:p-6 rounded-xl shadow-md hover:bg-gray-200">
                         <div class="flex items-start gap-2">
                             <div class="md:flex-shrink-0">
                                 @if ($post->creator_image)
@@ -92,9 +93,11 @@
                                 @endif
                             </div>
                             <div>
-                                <p class="font-semibold">
+                                <a
+                                href="{{route('profile.show', $post->creator_id)}}"
+                                class="font-semibold">
                                     {{ $post->creator_name }}
-                                </p>
+                                </a>
                                 <p class="text-gray-500 text-sm">
                                     @php
                                         \Carbon\Carbon::setLocale('id');
@@ -112,9 +115,11 @@
                             </div>
                         @endif
 
-                        <p class="mt-3 text-sm">
+                        <a
+                        href="{{route('posts.show', $post->id)}}"
+                        class="mt-3 text-sm">
                             {{ $post->content }}
-                        </p>
+                        </a>
 
                         <div class="flex items-center justify-between w-full mt-3">
                             <div class="flex items-center justify-between mt-3">

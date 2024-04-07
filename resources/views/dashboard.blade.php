@@ -74,12 +74,24 @@
                 <div class="card-title">
                     <div class="avatar">
                         <div class="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                            <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            @if (auth()->user()->image)
+                            <img class="w-24 h-24 rounded-full"
+                                src="{{ asset('storage/images/' . auth()->user()->image) }}" alt="Profile Picture" />
+                            @else
+                                <div class="w-24 h-24 rounded-full flex items-center justify-center bg-gray-200">
+                                    <img class="w-24 h-24 rounded-full"
+                                        src="https://ui-avatars.com/api/?name={{ auth()->user()->nama }}&color=7F9CF5&background=EBF4FF" />
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-sm font-extrabold">Sammi Aldhi Yanto</span>
-                        <span class="text-xs">@sammi</span>
+                        <span class="text-sm font-extrabold">
+                            {{auth()->user()->name}}
+                        </span>
+                        <span class="text-xs">
+                            {{auth()->user()->role}}
+                        </span>
                     </div>
                 </div>
 
