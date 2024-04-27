@@ -21,23 +21,21 @@ class GrupController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'id_desa' => 'required|exists:desa,id',
-            'id_creator' => 'required|exists:users,id',
-            'group_name' => 'required',
-            'description' => 'nullable',
-        ]);
+        $user = auth()->user();
+        $idDesa = $user->id_desa;
+        $idUser = $user->id;
 
         DB::table('grup')->insert([
-            'id_desa' => $validatedData['id_desa'],
-            'id_creator' => $validatedData['id_creator'],
-            'group_name' => $validatedData['group_name'],
-            'description' => $validatedData['description'],
+            'id_desa' => $idDesa,
+            'id_creator' =>  $idUser,
+            'group_name' => $request->get('group_name'),
+            'description' => $request->get('description'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('grups.index')->with('success', 'Grup berhasil ditambahkan');
+        // back
+        return redirect()->back()->with('success', 'Grup berhasil dibuat');
     }
 
     public function edit($id)

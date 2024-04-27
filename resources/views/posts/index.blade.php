@@ -185,7 +185,7 @@
                 <dialog id="my_modal_1" class="modal">
                     <div class="modal-box bg-white">
                         <h3 class="font-bold text-lg">Buat Grup</h3>
-                        <form class="py-4" method="post" action="{{ route('groups.store') }}">
+                        <form class="py-4" method="post" action="{{ route('grups.store') }}">
                             @csrf
                             <div class="mb-4">
                                 <label for="group_name" class="block text-sm font-medium text-gray-700">Nama

@@ -15,9 +15,9 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class=" text-black">
                     @foreach ($notifications as $notif)
-                        <tr class="{{ $notif->read == 0 ? 'font-semibold bg-gray-200' : 'bg-transparent' }}">
+                        <tr class="{{ $notif->read == 0 ? 'font-semibold bg-gray-100' : 'bg-transparent' }}">
                             <td>
                                 <div class="flex items-center gap-3">
                                     <div class="avatar">

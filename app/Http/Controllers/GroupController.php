@@ -70,7 +70,7 @@ class GroupController extends Controller
         DB::table('group_members')->insert([
             'group_id' => $groupId,
             'user_id' => auth()->id(),
-            'status' => 'Accepted', // Status 'Admin' berarti user yang membuat grup adalah admin grup
+            'status' => 'Admin', // Status 'Admin' berarti user yang membuat grup adalah admin grup
             'created_at' => now(),
             'updated_at' => now(),
         ]);

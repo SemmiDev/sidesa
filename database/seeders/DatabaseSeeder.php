@@ -33,14 +33,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'sammi',
-            'nik' => 'sammi',
-            'no_hp' => 'sammi',
+            'name' => 'wulan',
+            'nik' => 'wulan',
+            'no_hp' => 'wulan',
             'alamat' => 'Jl. Raya Cibadak No. 123',
             'role' => 'Warga',
             'is_confirmed' => true,
             'id_desa' => 1,
-            'password' => bcrypt('sammi'),
+            'password' => bcrypt('wulan'),
         ]);
     }
 }
