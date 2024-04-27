@@ -74,7 +74,7 @@
                             <form action="{{ route('groups.leave', [$group->group_id]) }}" method="POST">
                                 @csrf
                                 <button
-                                    class="text-sm bg-red-300 font-semibold mt-2p-4 p-2 m-4 rounded-md flex gap-1 items-center">
+                                    class="btn btn-sm btn-error m-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"

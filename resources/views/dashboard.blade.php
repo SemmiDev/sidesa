@@ -38,6 +38,27 @@
                 <span>Obrolan</span>
             </a>
 
+            <a href="{{ route('notification.index') }}"
+                class="bg-[#365586] flex gap-2 items-center justify-center p-5 text-center  text-white font-bold   rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+                </svg>
+
+                <span>Notifikasi</span>
+                <p class="bg-[#81c6d9] text-white rounded-full w-8 h-8 flex items-center justify-center">
+                    @php
+                    // count read = 0
+                    $total = \DB::table('notification')->where('read', 0)
+                    ->where('to', auth()->user()->id)
+                    ->count();
+
+                    echo $total;
+                    @endphp
+                </p>
+            </a>
+
             <div
                 class="bg-[#365586] flex gap-2 items-center justify-center p-5 text-center  text-white font-bold   rounded-xl">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -65,9 +86,7 @@
     </div>
 
     <div class="py-5 px-3 flex gap-2 flex-wrap">
-        <a
-        href="{{route('posts.index')}}"
-        class="card w-96 bg-base-100 shadow-xl image-full">
+        <a href="{{ route('posts.index') }}" class="card w-96 bg-base-100 shadow-xl image-full">
             <figure><img src="/posts.jpg" alt="Shoes" /></figure>
             <div class="card-body flex flex-col justify-between items-start">
 
@@ -75,8 +94,9 @@
                     <div class="avatar">
                         <div class="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                             @if (auth()->user()->image)
-                            <img class="w-24 h-24 rounded-full"
-                                src="{{ asset('storage/images/' . auth()->user()->image) }}" alt="Profile Picture" />
+                                <img class="w-24 h-24 rounded-full"
+                                    src="{{ asset('storage/images/' . auth()->user()->image) }}"
+                                    alt="Profile Picture" />
                             @else
                                 <div class="w-24 h-24 rounded-full flex items-center justify-center bg-gray-200">
                                     <img class="w-24 h-24 rounded-full"
@@ -87,10 +107,10 @@
                     </div>
                     <div class="flex flex-col">
                         <span class="text-sm font-extrabold">
-                            {{auth()->user()->name}}
+                            {{ auth()->user()->name }}
                         </span>
                         <span class="text-xs">
-                            {{auth()->user()->role}}
+                            {{ auth()->user()->role }}
                         </span>
                     </div>
                 </div>

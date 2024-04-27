@@ -154,7 +154,12 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('success', 'Post berhasil dihapus');
     }
 
-    public function show($id) {
+    public function show(Request $request, $id) {
+        $notif_id = $request->get('notif_id');
+        if ($notif_id) {
+            DB::table('notification')->where('id', $notif_id)->update(['read' => 1]);
+        }
+
         $post = DB::table('posts')
             ->join('users', 'posts.id_creator', '=', 'users.id')
             ->leftJoin('post_like', 'posts.id', '=', 'post_like.id_post')

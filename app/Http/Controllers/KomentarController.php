@@ -18,6 +18,23 @@ class KomentarController extends Controller
             'updated_at' => now(),
         ]);
 
+        $post = DB::table('posts')->where('id', $request->get('post_id'))->first();
+
+        $name = auth()->user()->name;
+        $content = substr($request->get('content'), 0, 20);
+        $message = 'Mengomentari postingan Anda: ' . $content;
+
+        DB::table("notification")->insert([
+            'name' => $name,
+            'message' => $message,
+            'to' => $post->id_creator,
+            'foto' => auth()->user()->image,
+            'url' => '/posts/' . $request->get('post_id'),
+            'read' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         return redirect()->back()->with('success', 'Komentar berhasil ditambahkan');
     }
 

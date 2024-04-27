@@ -4,6 +4,7 @@ use App\Http\Controllers\AnggotaGrupController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GrupController;
 use App\Http\Controllers\KomentarController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\ProfileController;
@@ -112,6 +113,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/like/{postId}', [PostLikeController::class, 'like'])->name('post.like');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/notification', [NotificationController::class, 'index'])->name('notification.index');
 });
 
 Route::middleware('auth')->group(function () {

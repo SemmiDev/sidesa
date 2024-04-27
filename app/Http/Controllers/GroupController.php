@@ -41,28 +41,36 @@ class GroupController extends Controller
 
     public function store(Request $request)
     {
-
         // Validasi input form
         $request->validate([
             'group_name' => 'required',
-            'group_description' => 'nullable',
+            'description' => 'nullable',
         ]);
 
+        // save image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $fileName);
+        } else {
+            $fileName = null;
+        }
+
         // Menyimpan data grup baru
-        $groupId = DB::table('grup')->insertGetId([
+        $groupId = DB::table('groups')->insertGetId([
             'group_name' => $request->get('group_name'),
             'id_desa' => auth()->user()->id_desa,
-            'id_creator' => auth()->id(),
-            'description' => $request->get('group_description'),
+            'description' => $request->get('description'),
+            'image' => $fileName,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         // Menambahkan user yang membuat grup sebagai anggota grup
-        DB::table('anggota_grup')->insert([
-            'id_grup' => $groupId,
+        DB::table('group_members')->insert([
+            'group_id' => $groupId,
+            'user_id' => auth()->id(),
             'status' => 'Accepted', // Status 'Admin' berarti user yang membuat grup adalah admin grup
-            'id_user' => auth()->id(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
