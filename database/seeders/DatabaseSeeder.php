@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
             'role' => 'Admin',
             'is_confirmed' => true,
             'id_desa' => 1,
+            'lat' => 0.47811508286292503, 
+            'long' => 101.37857895905262,
             'password' => bcrypt('admin'),
         ]);
 
@@ -40,6 +42,21 @@ class DatabaseSeeder extends Seeder
             'role' => 'Warga',
             'is_confirmed' => true,
             'id_desa' => 1,
+            'lat' => 0.4792731038810087, 
+            'long' => 101.37888053756353,
+            'password' => bcrypt('wulan'),
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'sammi',
+            'nik' => 'sammi',
+            'no_hp' => 'wulasammi',
+            'alamat' => 'Jl. Raya Cibadak No. 123',
+            'role' => 'Warga',
+            'is_confirmed' => true,
+            'id_desa' => 1,
+            'lat' => 0.47887544458153386, 
+            'long' => 101.38130237564509,
             'password' => bcrypt('wulan'),
         ]);
     }

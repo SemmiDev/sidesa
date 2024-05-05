@@ -49,12 +49,13 @@
                 <span>Notifikasi</span>
                 <p class="bg-[#81c6d9] text-white rounded-full w-8 h-8 flex items-center justify-center">
                     @php
-                    // count read = 0
-                    $total = \DB::table('notification')->where('read', 0)
-                    ->where('to', auth()->user()->id)
-                    ->count();
+                        // count read = 0
+                        $total = \DB::table('notification')
+                            ->where('read', 0)
+                            ->where('to', auth()->user()->id)
+                            ->count();
 
-                    echo $total;
+                        echo $total;
                     @endphp
                 </p>
             </a>
@@ -143,5 +144,40 @@
             </a>
         </div>
     @endif
+
+    <div class="rounded-xl mx-3" id="map"></div>
+    {{-- <div class="mt-20 bg-transparent"></div> --}}
+
+    <script>
+        // var map = L.map('map').setView([0, 0], 2); // Default view, you may change the coordinates and zoom level
+
+        var map = L.map('map', {
+        layers: L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+            maxZoom: 20,
+            subdomains:['mt0','mt1','mt2','mt3']
+        })
+    });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+
+        // Fetch users data from Laravel backend
+        var usersData = {!! json_encode($anggotaDesa) !!};
+
+        var centerUser = usersData[0]; // For example, choose the first user
+
+        map.setView([parseFloat(centerUser.lat), parseFloat(centerUser.long)], 17); // Set zoom level as desired
+
+        // Loop through users data and add markers to the map
+        usersData.forEach(function(user) {
+            var lat = parseFloat(user.lat);
+            var lng = parseFloat(user.long);
+            L.marker([lat, lng]).addTo(map)
+                .bindPopup('<b> Rumah ' + user.name + '</b>')
+                .openPopup();
+        });
+    </script>
 
 </x-app-layout>

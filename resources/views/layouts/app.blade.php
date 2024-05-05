@@ -8,7 +8,19 @@
 
     <title>{{ config('app.name', 'SIDESA') }}</title>
 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+    <style>
+        #map {
+            height: 300px;
+            /* width: 100%; */
+        }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet/dist/leaflet.css"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
