@@ -13,8 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         DB::table('desa')->insert([
             'nama' => 'Desa Cibadak',
             'kode_pos' => '43211',
@@ -23,41 +21,41 @@ class DatabaseSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => 'admin',
-            'nik' => 'admin',
-            'no_hp' => 'admin',
+            'nik' => '12345',
+            'no_hp' => '0812345',
             'alamat' => 'Jl. Raya Cibadak No. 123',
             'role' => 'Admin',
             'is_confirmed' => true,
             'id_desa' => 1,
-            'lat' => 0.47811508286292503, 
+            'lat' => 0.47811508286292503,
             'long' => 101.37857895905262,
-            'password' => bcrypt('admin'),
+            'password' => bcrypt('12345678'),
         ]);
 
         DB::table('users')->insert([
             'name' => 'wulan',
-            'nik' => 'wulan',
-            'no_hp' => 'wulan',
+            'nik' => '12346',
+            'no_hp' => '0812346',
             'alamat' => 'Jl. Raya Cibadak No. 123',
             'role' => 'Warga',
             'is_confirmed' => true,
             'id_desa' => 1,
-            'lat' => 0.4792731038810087, 
+            'lat' => 0.4792731038810087,
             'long' => 101.37888053756353,
-            'password' => bcrypt('wulan'),
+            'password' => bcrypt('12345678'),
         ]);
 
         DB::table('users')->insert([
-            'name' => 'sammi',
-            'nik' => 'sammi',
-            'no_hp' => 'wulasammi',
+            'name' => 'santi',
+            'nik' => '12347',
+            'no_hp' => '0812347',
             'alamat' => 'Jl. Raya Cibadak No. 123',
             'role' => 'Warga',
             'is_confirmed' => true,
             'id_desa' => 1,
-            'lat' => 0.47887544458153386, 
+            'lat' => 0.47887544458153386,
             'long' => 101.38130237564509,
-            'password' => bcrypt('wulan'),
+            'password' => bcrypt('12345678'),
         ]);
     }
 }

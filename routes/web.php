@@ -5,6 +5,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GrupController;
 use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\ProfileController;
@@ -124,6 +125,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/komentar/{id}/edit', [KomentarController::class, 'edit'])->name('komentar.edit');
     Route::put('/komentar/{id}', [KomentarController::class, 'update'])->name('komentar.update');
     Route::delete('/komentar/{id}', [KomentarController::class, 'destroy'])->name('komentar.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get("/private-chat/{postId}", [OrderController::class, 'privateChat'])->name('private-chat');
 });
 
 require __DIR__ . '/auth.php';

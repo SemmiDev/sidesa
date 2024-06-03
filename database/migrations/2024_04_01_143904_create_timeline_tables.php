@@ -46,6 +46,10 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->timestamps();
 
+            $table->boolean('for_sale')->default(false);
+            $table->decimal('harga', 10, 2)->nullable();
+            $table->integer('stock')->nullable();
+
             $table->foreign('id_grup')->references('id')->on('grup')->onDelete('set null');
             $table->foreign('id_desa')->references('id')->on('desa')->onDelete('cascade');
             $table->foreign('id_creator')->references('id')->on('users')->onDelete('cascade');
@@ -70,6 +74,21 @@ return new class extends Migration
 
             $table->foreign('id_post')->references('id')->on('posts')->onDelete('cascade');
             $table->foreign('id_creator')->references('id')->on('users')->onDelete('cascade');
+        });
+
+        Schema::create('order', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('id_post');
+            $table->unsignedBigInteger('id_user');
+            $table->integer('jumlah');
+            $table->string('id_order')->nullable();
+            $table->string('snap_token')->nullable();
+            $table->decimal('total', 10, 2);
+            $table->string('status')->default('Unpaid'); // Unpaid, Paid
+            $table->timestamps();
+
+            $table->foreign('id_post')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

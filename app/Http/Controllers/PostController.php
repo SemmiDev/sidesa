@@ -14,6 +14,8 @@ class PostController extends Controller
         $tab = $request->get('tab', 'Umum');
         $idGroup = $request->get('id-group', null);
 
+        $marketplace = $request->get('marketplace', false);
+
         $groups = DB::table('grup')
             ->leftJoin('anggota_grup', function ($join) {
                 $join->on('grup.id', '=', 'anggota_grup.id_grup')
@@ -40,6 +42,9 @@ class PostController extends Controller
                 'posts.content',
                 'posts.photo',
                 'posts.kategori',
+                'posts.for_sale',
+                'posts.harga',
+                'posts.stock',
                 'posts.updated_at',
                 'users.id as creator_id',
                 'users.name as creator_name',
@@ -57,8 +62,11 @@ class PostController extends Controller
                 return $query->where('posts.kategori', 'Umum');
             })
             ->where('posts.id_desa', auth()->user()->id_desa)
-            ->groupBy('posts.id', 'posts.content', 'posts.updated_at', 'users.image', 'posts.photo', 'posts.kategori', 'users.name', 'users.id')
+            ->groupBy('posts.id', 'posts.content', 'posts.updated_at', 'users.image', 'posts.photo', 'posts.kategori', 'users.name', 'users.id', 'posts.for_sale', 'posts.harga', 'posts.stock')
             ->orderBy('posts.updated_at', 'desc')
+            ->when($marketplace, function ($query) {
+                return $query->where('posts.for_sale', true);
+            })
             ->get();
 
         // check is user has already like or not
@@ -103,6 +111,7 @@ class PostController extends Controller
             'id_desa' => $user->id_desa,
             'id_creator' => $user->id,
             'content' => $request->get('content'),
+            'for_sale' => $request->get('for_sale') == 'on',
             'photo' => $fileName ?? null,
             'created_at' => now(),
             'updated_at' => now(),

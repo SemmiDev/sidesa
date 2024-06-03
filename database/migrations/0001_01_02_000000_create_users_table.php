@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->enum('role', ['Admin', 'Warga']);
 
+            $table->decimal('saldo', 10, 2)->default(0);
+
             $table->unsignedBigInteger('id_desa');
             $table->foreign('id_desa')->references('id')->on('desa')->onDelete('cascade');
 

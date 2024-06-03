@@ -37,6 +37,9 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @yield('head')
+
 </head>
 
 <body class="font-sans antialiased">
@@ -47,6 +50,10 @@
             {{ $slot }}
         </main>
     </div>
+
+
+@yield('scripts')
+
 </body>
 
 </html>
