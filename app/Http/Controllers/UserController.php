@@ -12,6 +12,7 @@ class UserController extends Controller
     {
         $id_desa = auth()->user()->id_desa;
         $users = DB::table('users')->where('id_desa', $id_desa)->get();
+
         return view('users.index', ['users' => $users]);
     }
 

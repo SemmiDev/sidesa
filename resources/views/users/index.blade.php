@@ -3,34 +3,46 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Card Anggota Desa -->
             @foreach ($users as $user)
-                <div class="bg-white shadow-lg rounded-lg p-4">
-                    <div class="flex items-center justify-center mb-4">
-                        @if ($user->image)
-                            <img src="{{ asset('storage/images/' . $user->image) }}" alt="{{ $user->name }}"
-                                class="w-20 h-20 rounded-full object-cover">
-                        @else
-                            <img src="https://ui-avatars.com/api/?name={{ $user->name }}&color=7F9CF5&background=EBF4FF"
-                                alt="{{ $user->name }}" class="w-20 h-20 rounded-full object-cover">
-                        @endif
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-lg font-semibold">{{ $user->name }}</h3>
-                        <p class="text-sm text-gray-500">{{ $user->nik }}</p>
+                <div class="card w-full bg-base-100/0 shadow-2xl mb-6">
+                    <div class="card-body items-center text-center">
+                        <div class="avatar mb-4">
+                            <div class="w-24 rounded-full">
+                                @if ($user->image)
+                                    <img src="{{ asset('storage/images/' . $user->image) }}" alt="{{ $user->name }}" />
+                                @else
+                                    <img src="https://ui-avatars.com/api/?name={{ $user->name }}&color=7F9CF5&background=EBF4FF" alt="{{ $user->name }}" />
+                                @endif
+                            </div>
+                        </div>
+                        <h2 class="card-title text-lg">{{ $user->name }}</h2>
+
+                        <table class="table w-full">
+                            <tbody>
+                            <tr>
+                                <td><span class="text-sm text-gray-500">NIK</span></td>
+                                <td><span class="text-sm text-gray-500">{{ $user->nik }}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-sm text-gray-500">No. HP</span></td>
+                                <td><span class="text-sm text-gray-500">{{ $user->no_hp }}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-sm text-gray-500">Alamat</span></td>
+                                <td><span class="text-sm text-gray-500">{{ $user->alamat }}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
 
                         @if (Auth::user()->role == 'Admin')
-                            <div class="mt-4 flex justify-center space-x-2">
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                            <div class="card-actions mt-4">
+                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button
-                                        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
-                                    Hapus</button>
+                                    <button class="btn btn-error">Hapus</button>
                                 </form>
-
-                                <form action="{{ route('users.confirm', $user->id) }}" method="POST">
+                                <form action="{{ route('users.confirm', $user->id) }}" method="POST" class="inline">
                                     @csrf
-                                    <button
-                                        class="{{ $user->is_confirmed ? 'bg-yellow-500' : 'bg-green-500' }} text-white px-4 py-2 rounded-lg hover:bg-green-600">
+                                    <button class="btn {{ $user->is_confirmed ? 'btn-warning' : 'btn-success' }}">
                                         {{ $user->is_confirmed ? 'Batalkan Konfirmasi' : 'Konfirmasi' }}</button>
                                 </form>
                             </div>
