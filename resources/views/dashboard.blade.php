@@ -6,7 +6,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mt-5">
             <div class="bg-transparent shadow-lg shadow-slate-300 p-5 rounded-md col-span-1 md:col-span-3 text-center">
-                <iframe src="{{ route('groups.index') }}" class="w-full h-full"></iframe>
+                <iframe src="{{ route('groups.index') }}" class="w-full md:h-full h-[600px]"></iframe>
                 {{-- <div class="hidden md:block rounded-md mx-3 mt-5" id="map"></div> --}}
             </div>
             <div class="bg-gray-400 text-center rounded-md col-span-1 md:col-span-6">
