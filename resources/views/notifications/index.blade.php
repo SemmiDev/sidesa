@@ -1,9 +1,20 @@
-<x-app-layout>
+<x-noheader-layout>
 
     <div class="py-5 px-3 flex gap-2 flex-wrap">
 
         <div class="flex w-full justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Notifikasi</h2>
+            <p class="bg-[#81c6d9] text-white rounded-full w-8 h-8 flex items-center justify-center">
+                @php
+                    // count read = 0
+                    $total = \DB::table('notification')
+                        ->where('read', 0)
+                        ->where('to', auth()->user()->id)
+                        ->count();
+
+                    echo $total;
+                @endphp
+            </p>
         </div>
 
         <div class="overflow-x-auto">

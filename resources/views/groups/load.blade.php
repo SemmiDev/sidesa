@@ -1,4 +1,4 @@
-<div id="chat-content" class="px-4 max-w-md mx-auto pt-5 overflow-y-auto" style="height: calc(100vh - 80px);">
+<div id="chat-content" class="px-4 mx-auto pt-5 overflow-y-auto" style="height: calc(100vh - 80px);">
     @foreach ($messages as $message)
         {{-- other --}}
         @if ($message->is_me == 0)

@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-noheader-layout>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="bg-white overflow-hidden rounded-xl shadow-xl sm:rounded-lg">
             <div class="p-6 sm:px-10 bg-white  border-b border-gray-200">
@@ -156,4 +156,4 @@
             });
         });
     </script>
-</x-app-layout>
+</x-noheader-layout>

@@ -11,7 +11,7 @@ class RegisterWargaController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required|string',
-            'nik' => 'required|string|unique:users',
+            'nik' => 'required|string|unique:users|min:16|max:16',
             'no_hp' => 'required|string|unique:users',
             'alamat' => 'required|string',
             'id_desa' => 'required|exists:desa,id',

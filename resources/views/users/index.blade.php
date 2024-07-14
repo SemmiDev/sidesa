@@ -1,9 +1,9 @@
-<x-app-layout>
-    <div class="px-4 py-8 max-w-7xl mx-auto">
+<x-noheader-layout>
+    <div class="px-4 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Card Anggota Desa -->
             @foreach ($users as $user)
-                <div class="card w-full bg-base-100/0 shadow-2xl mb-6">
+                <div class="card w-full bg-black shadow-2xl mb-6">
                     <div class="card-body items-center text-center">
                         <div class="avatar mb-4">
                             <div class="w-24 rounded-full">
@@ -19,16 +19,16 @@
                         <table class="table w-full">
                             <tbody>
                             <tr>
-                                <td><span class="text-sm text-gray-500">NIK</span></td>
-                                <td><span class="text-sm text-gray-500">{{ $user->nik }}</span></td>
+                                <td><span class="text-sm text-white">NIK</span></td>
+                                <td><span class="text-sm text-white">{{ $user->nik }}</span></td>
                             </tr>
                             <tr>
-                                <td><span class="text-sm text-gray-500">No. HP</span></td>
-                                <td><span class="text-sm text-gray-500">{{ $user->no_hp }}</span></td>
+                                <td><span class="text-sm text-white">No. HP</span></td>
+                                <td><span class="text-sm text-white">{{ $user->no_hp }}</span></td>
                             </tr>
                             <tr>
-                                <td><span class="text-sm text-gray-500">Alamat</span></td>
-                                <td><span class="text-sm text-gray-500">{{ $user->alamat }}</span></td>
+                                <td><span class="text-sm text-white">Alamat</span></td>
+                                <td><span class="text-sm text-white">{{ $user->alamat }}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -52,4 +52,4 @@
             @endforeach
         </div>
     </div>
-</x-app-layout>
+</x-noheader-layout>

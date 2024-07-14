@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-noheader-layout>
     <!-- Detail Post -->
     <div class="p-6 bg-white">
         <div class="flex items-center space-x-4 mb-4">
@@ -113,4 +113,4 @@
 
     </div>
     </div>
-</x-app-layout>
+</x-noheader-layout>

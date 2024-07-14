@@ -1,12 +1,5 @@
-<x-app-layout>
-
-    <div class="relative px-3 mt-3">
-        <input type="text" placeholder="Cari..."
-            class="bg-[#8ba1bc] w-full placeholder-text-white text-white border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-xl px-4 py-2">
-    </div>
-
-    <div class="py-5 px-3 flex gap-2 flex-wrap">
-
+<x-noheader-layout>
+    <div class="px-3 flex gap-2 flex-wrap">
         <div class="flex w-full justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Daftar Grup</h2>
             @if (auth()->user()->role == 'Admin')
@@ -20,6 +13,7 @@
                 <div class="bg-white rounded-xl">
                     <a href="
                     {{ $group->status == 'Member' || $group->status == 'Admin' ? route('chats.index', [$group->group_id]) : '#' }}"
+                    target="_blank"
                         class="bg-white flex  justify-between text-black rounded-md p-4 transition duration-300 ease-in-out transform hover:-translate-y-1">
                         <div class="flex items-center mb-2">
                             <div class="w-12 h-12 bg-gray-300 rounded-full">
@@ -45,12 +39,7 @@
                             @csrf
                             @method('DELETE')
                             <button
-                                class="text-sm bg-red-300 font-semibold mt-2p-4 p-2 m-4 rounded-md flex gap-1 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
-                                </svg>
+                                class="btn-error btn m-3">
                                 Hapus
                             </button>
                         </form>
@@ -128,4 +117,4 @@
             @endforeach
         </div>
     </div>
-</x-app-layout>
+</x-noheader-layout>

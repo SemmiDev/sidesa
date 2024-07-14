@@ -12,6 +12,6 @@ class OrderController extends Controller
         $creator = DB::table('users')->where('id', $post->id_creator)->first();
 
         $customMessage = "Halo, saya tertarik dengan " . $post->content . ". Bolehkah saya bertanya lebih lanjut?";
-        return redirect()->away("https://wa.me/{$creator->no_hp}?text={$customMessage}");
+        return redirect()->away("https://wa.me/{$creator->no_hp}?text={$customMessage}");   
     }
 }

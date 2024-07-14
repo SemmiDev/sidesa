@@ -31,23 +31,21 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #ddecee;
         }
     </style>
 
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     @yield('head')
+
 </head>
 
-<body class="font-sans antialiased">
-    <div class=" bg-[#ddecee]">
-        @include('layouts.navigation')
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
-    </div>
+    <!-- Page Content -->
+    <main class="min-h-screen bg-[#ddecee]">
+        {{ $slot }}
+    </main>
 
 
 @yield('scripts')

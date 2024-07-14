@@ -75,7 +75,9 @@ class GroupController extends Controller
             'updated_at' => now(),
         ]);
 
-        return back()->with('success', 'Grup berhasil dibuat');
+        return redirect()->route('groups.index')->with('success', 'Grup berhasil dibuat');
+
+        // return back()->with('success', 'Grup berhasil dibuat');
     }
 
     public function edit($id)

@@ -1,7 +1,7 @@
 <x-app-layout>
     <!-- Header -->
     <div
-        class="fixed top-0 left-0 right-0 bg-[#8ba1bc] text-black shadow-md px-4 py-2 z-10">
+        class="fixed top-0 left-0 right-0 bg-[#8ba1bc] text-black w-full shadow-md px-4 py-2 z-10">
         <div class="flex items-center justify-between">
             <a href={{ route('groups.members', [$group->id]) }} class="flex items-center space-x-4">
                 <!-- Logo WhatsApp -->
@@ -32,7 +32,7 @@
     </div>
 
     <!-- Daftar Chat -->
-    <div id="chat-content" class="px-4 max-w-md mx-auto pt-5 overflow-y-auto" style="height: calc(100vh - 80px);">
+    <div id="chat-content" class="px-4 mx-auto pt-5 overflow-y-auto" style="height: calc(100vh - 80px);">
         @foreach ($messages as $message)
             {{-- other --}}
             @if ($message->is_me == 0)

@@ -22,7 +22,7 @@
                     id="image"
                     name="image"
                     accept="image/*"
-                    class="file-input file-input-bordered file-input-md w-full max-w-xs">
+                    class="file-input file-input-info file-input-bordered file-input-md w-full max-w-xs">
                 </div>
 
                 <div class="flex items-center">
